@@ -24,12 +24,17 @@ React Native + Expoにとる開発を進める上で実機でのテストがで�
 ## 方法1: Expo Go アプリでテスト（最も簡単）
 
 ```bash
-# 一度サーバーを停止してから
+# 基本の起動（Expo Go専用URL生成）
 npx expo start --go
-# npm script経由なら
+
+# npm script経由の場合
 npm start -- --go
-# ネットワークが怪しいなら（外出先/社内網）
+
+# ネットワーク問題対応（推奨）
 npx expo start --go --tunnel
+
+# 重要：--goフラグを必ず使用
+# expo-dev-clientがある場合、--goなしだと開発ビルド用URLになりiOSカメラで認識不可
 ```
 
 ### ステップ1: Expo Goアプリのインストール
@@ -137,6 +142,31 @@ npm run type-check
 # 依存関係の再インストール
 npm run reset
 ```
+
+#### 問題5: トンネルモードでもiOSカメラが"使用可能なデータが見つかりません"と表示
+**原因:** `expo-dev-client`がインストールされているため、開発ビルド用URL（`exp+devclient://`）が生成され、iOSカメラアプリで認識できない。
+
+**確認方法:**
+ターミナルで以下のような出力が表示される場合：
+```
+› Scan the QR code above with your development build
+› Or enter this URL directly in Expo Go: exp+devclient://[...]
+```
+
+**解決法:**
+```bash
+# 現在のサーバーを停止（Ctrl+C）してから以下を実行
+npx expo start --go --tunnel
+```
+
+**期待される正しい出力:**
+```
+› Metro waiting on exp://[ngrok-url]/
+› Scan the QR code above with Expo Go (Android) or the Camera app (iOS)
+› Using Expo Go
+```
+
+**重要:** `--go`フラグによりExpo Go専用URL（`exp://`）が生成され、iOSカメラで正常に認識されます。
 
 ---
 

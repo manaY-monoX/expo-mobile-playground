@@ -35,8 +35,11 @@ npm run reset
 
 ### Device Testing
 ```bash
-# Network issues or VPN interference
-expo start --tunnel
+# Critical: Use --go flag to avoid expo-dev-client interference
+npx expo start --go
+
+# For network issues or VPN interference
+npx expo start --go --tunnel
 
 # Platform-specific testing
 npm run android  # or ios, web
@@ -110,8 +113,9 @@ All references should use "expo-mobile-playground" (not "mobile-expo-playground"
 
 ### Common Troubleshooting
 - **Metro bundler errors**: Run `npm run reset`
-- **Device connection issues**: Try `expo start --tunnel`
+- **Device connection issues**: Try `npx expo start --go --tunnel`
 - **TypeScript errors**: Run `npm run type-check` and fix before proceeding
-- **Expo Go QR code issues**: Use `npx expo start --go` flag explicitly
+- **iOS "No usable data found" QR error**: Use `npx expo start --go --tunnel` (expo-dev-client creates incompatible URLs)
+- **Wrong URL format**: Ensure URLs start with `exp://` not `exp+devclient://`
 
 This project serves as a testing ground for React Native mobile development workflows and real device testing capabilities using modern Expo tooling.
