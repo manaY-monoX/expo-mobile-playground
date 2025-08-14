@@ -1,0 +1,18 @@
+---
+description: ファイル構成ルール
+alwaysApply: false
+---
+## ファイル構成ルール
+
+```
+.
+├── App.tsx                 # メインアプリケーションコンポーネント
+├── app.json               # Expo設定（Hermes有効化必須）
+├── index.ts               # エントリーポイント
+├── package.json           # 依存関係・スクリプト管理
+├── tsconfig.json          # TypeScript設定
+├── assets/                # アプリケーションアセット
+├── .cursor/rules/         # プロジェクトルール
+└── DEVICE_TESTING_MANUAL.md # 実機テストマニュアル
+```
+

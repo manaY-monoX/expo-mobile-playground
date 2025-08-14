@@ -1,15 +1,73 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Text, Animated, Linking, TouchableOpacity } from 'react-native';
+import LottieView from 'lottie-react-native';
+import { useEffect, useRef, useState } from 'react';
 
 export default function App() {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(50)).current;
+  const [isLottieFinished, setIsLottieFinished] = useState(false);
+
+  useEffect(() => {
+    if (isLottieFinished) {
+      const timer = setTimeout(() => {
+        Animated.parallel([
+          Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(slideAnim, {
+            toValue: 0,
+            duration: 800,
+            useNativeDriver: true,
+          }),
+        ]).start();
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLottieFinished, fadeAnim, slideAnim]);
+
+  const handleGitHubPress = () => {
+    Linking.openURL('https://github.com/manaY-monoX/expo-mobile-playground');
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.haloEffect}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>宇宙最強の完璧なアプリ</Text>
-        <Text style={styles.powerLevel}>戦闘力: 530,000</Text>
-      </View>
-      <StatusBar style="light" />
+      {!isLottieFinished && (
+        <View style={styles.animationContainer}>
+          <LottieView
+            source={require('./assets/lottiefiles/hello-apple.lottie')}
+            style={styles.animation}
+            autoPlay
+            loop={false}
+            onAnimationFinish={() => setIsLottieFinished(true)}
+          />
+        </View>
+      )}
+      
+      {isLottieFinished && (
+        <Animated.View
+          style={[
+            styles.mainContentContainer,
+            {
+              opacity: fadeAnim,
+              transform: [{ translateY: slideAnim }],
+            },
+          ]}
+        >
+          <Text style={styles.descriptionText}>
+            このアプリはExpo + React Nativeの実機テスト用アプリです。
+          </Text>
+          
+          <TouchableOpacity style={styles.githubButton} onPress={handleGitHubPress}>
+            <Text style={styles.githubButtonText}>GitHub Repository</Text>
+          </TouchableOpacity>
+        </Animated.View>
+      )}
+      
+      <StatusBar style="dark" />
     </View>
   );
 }
@@ -17,54 +75,46 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a0040',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  haloEffect: {
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(138, 43, 226, 0.1)',
-    borderWidth: 2,
-    borderColor: 'rgba(186, 85, 211, 0.3)',
-    shadowColor: '#BA55D3',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.8,
-    shadowRadius: 20,
-    elevation: 10,
   },
-  title: {
-    fontSize: 48,
-    fontWeight: 'bold',
-    color: '#E6E6FA',
-    textAlign: 'center',
-    marginBottom: 10,
-    textShadowColor: '#9370DB',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 10,
-    letterSpacing: 2,
+  animationContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    maxWidth: 300,
+    aspectRatio: 1,
   },
-  subtitle: {
-    fontSize: 20,
-    color: '#DDA0DD',
-    textAlign: 'center',
-    marginBottom: 15,
-    fontWeight: '300',
-    fontStyle: 'italic',
+  animation: {
+    width: '100%',
+    height: '100%',
   },
-  powerLevel: {
-    fontSize: 16,
-    color: '#FFD700',
+  mainContentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 40,
+  },
+  descriptionText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333333',
     textAlign: 'center',
-    fontWeight: 'bold',
-    textShadowColor: '#FF8C00',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 5,
+    lineHeight: 26,
+    marginBottom: 30,
+  },
+  githubButton: {
+    borderWidth: 1,
+    borderColor: '#DDDDDD',
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    borderRadius: 6,
+    backgroundColor: '#FAFAFA',
+  },
+  githubButtonText: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#666666',
   },
 });

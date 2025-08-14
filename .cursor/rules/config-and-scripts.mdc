@@ -1,0 +1,28 @@
+---
+description: 必須設定（app.json）とスクリプト
+alwaysApply: false
+---
+## 必須設定項目
+
+### app.json（抜粋）
+```json
+{
+  "expo": {
+    "jsEngine": "hermes",
+    "newArchEnabled": true,
+    "orientation": "portrait"
+  }
+}
+```
+
+### package.json スクリプト（必須）
+- `start`: 開発サーバー起動
+- `type-check`: TypeScript型チェック
+- `build`: プロダクションビルド（`expo export`）
+- `clean`: Metroキャッシュクリア
+- `reset`: キャッシュクリア + 依存再インストール
+- `prebuild`: ネイティブ前処理
+
+補足
+- `expo-dev-client` 併存のため、Expo Goでの起動は `--go`（必要に応じて `--tunnel`）を必須。
+

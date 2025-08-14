@@ -1,0 +1,31 @@
+---
+description: 開発ワークフローと実機テスト
+alwaysApply: false
+---
+## 開発ワークフロー
+
+### 1. 開発開始時
+```bash
+npm install
+npm run type-check
+npm start
+```
+
+### 2. コード変更時
+```bash
+npm run type-check
+# 実機テストは README.md を参照
+```
+
+### 3. コミット前
+```bash
+npm run clean
+npm run build
+# 実機での最終テスト
+```
+
+## 実機テスト（要点）
+- Expo Go での確認は `npx expo start --go --tunnel` を推奨
+- `expo-dev-client` 併存時、`--go` 未指定だと iOS カメラが認識不可
+- iOS/Android 双方、同一Wi‑Fi、必要に応じトンネル使用
+

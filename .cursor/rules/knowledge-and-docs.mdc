@@ -1,0 +1,22 @@
+---
+description: 開発知見と関連ドキュメント
+alwaysApply: false
+---
+## 開発知見（抜粋）
+- Expo CLI: `npx create-expo-app . --template blank-typescript` が確実
+- Hermes エンジン: `app.json` で明示設定
+- 実機テスト: Expo Go が最も簡便（`--go` を必須）
+- 同一 Wi‑Fi 環境が前提
+
+## 注意点（抜粋）
+- テンプレートは `blank-typescript` を指定
+- 既存ディレクトリへ初期化する場合は注意
+- ファイアウォール・VPN の影響に注意
+- `expo-dev-client` 併存時は `--go` が必須
+
+## 関連ドキュメント
+- Expo 公式: https://docs.expo.dev/
+- React Native 公式: https://reactnative.dev/
+- Hermes: https://hermesengine.dev/
+- 実機テスト詳細: `README.md`（本リポジトリ）
+

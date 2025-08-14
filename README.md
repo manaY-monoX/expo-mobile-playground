@@ -5,6 +5,9 @@ React Native + Expoにとる開発を進める上で実機でのテストがで�
 
 <img width="1200" height="630" alt="image" src="https://github.com/user-attachments/assets/bdebb4b2-f325-46c7-a6ce-840b56b56190" />
 
+### Quick Start
+Expo GoアプリをデバイスにInstallしたら、PCのterminalで、`npx expo start --go --tunnel`を実行しiOSのカメラで発行されたUROを読み込んでください。
+
 ---
 
 ## 前提条件
@@ -54,11 +57,11 @@ npm run start
 2. **iOS:** カメラアプリでQRコードをスキャン → Expo Goで開くを選択
 3. **Android:** Expo GoアプリでQRコードをスキャン
 
-### 期待される結果（AIが作りました。）
+<!-- ### 期待される結果（AIが作りました。）
 - 深い宇宙色の背景が表示される
 - 「Hello World」の文字が光るエフェクトで表示される
 - 「宇宙最強の完璧なアプリ」のサブタイトル
-- 「戦闘力: 530,000」の表示
+- 「戦闘力: 530,000」の表示 -->
 
 ### 発行されたQRコード(URL)が`//expo+devclient/...`となっている場合
 

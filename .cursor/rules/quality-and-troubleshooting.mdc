@@ -1,0 +1,33 @@
+---
+description: 品質基準とトラブルシューティング
+alwaysApply: false
+---
+## 品質保証基準
+
+### パフォーマンス要件
+- アプリ起動時間: 3秒以内
+- JavaScript実行: Hermes最適化
+- メモリ使用量: 効率的な管理
+
+### コード品質
+- 型安全性: TypeScript 100%
+- エラーハンドリング: 適切な例外処理
+- 変更時はコードレビュー
+
+## トラブルシューティング
+
+### Metro bundler エラー
+```bash
+npm run reset
+```
+
+### 実機接続できない
+```bash
+npx expo start --go --tunnel
+```
+
+### TypeScript エラー
+```bash
+npm run type-check
+```
+
