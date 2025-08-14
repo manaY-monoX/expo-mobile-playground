@@ -3,6 +3,8 @@
 React Native + Expoにとる開発を進める上で実機でのテストができるかどうかを確かめるための、リポジトリです。
 以下のマニュアルを参考に実機でのテストを行ってください。
 
+<img width="1200" height="630" alt="image" src="https://github.com/user-attachments/assets/bdebb4b2-f325-46c7-a6ce-840b56b56190" />
+
 ---
 
 ## 前提条件
